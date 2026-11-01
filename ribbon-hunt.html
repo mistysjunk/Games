@@ -17786,7 +17786,7 @@ try { localStorage.removeItem("ribbon-hunt-v1-color"); localStorage.removeItem("
     load(level, false, keep ? keep.seed : 0);
     if (keep && keep.t.length === t.length) { t = keep.t.slice(); shown = t.slice(); wasComplete = false; paint(0, true); update(); saveNow(); } // same drawing with the same number of lines: put every line back where it was
     var resume = !!keep || goodP(PROG.d[LEVELS[level].id]);
-    renderTiles(); showChapters(); panel.hidden = resume;               // a half-done drawing opens straight away; otherwise open on the chapter menu
+    renderTiles(); showChapters(); panel.hidden = false;               // Nov 1: always open on the chapter menu (she asked); a half-done drawing still carries on when she opens it
     cloudConnect();
     window.addEventListener("resize", layout);
     try { new ResizeObserver(layout).observe(document.body); } catch (e) {}
