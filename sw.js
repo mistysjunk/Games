@@ -3,7 +3,7 @@
    After that the game opens straight from the device (no Wi-Fi needed), and when online
    it quietly checks for a newer copy, so updates show up the next time the game is opened. */
 var CACHE = "my-games-1";
-var FILES = ["./", "icon-my-games-180.png", "icon-my-games-192.png", "icon-my-games-512.png", "icon-rainbow-ribbons-180.png", "icon-rainbow-ribbons-192.png", "icon-rainbow-ribbons-512.png", "icon-ribbon-hunt-180.png", "icon-ribbon-hunt-192.png", "icon-ribbon-hunt-512.png", "index.html", "my-games.webmanifest", "rainbow-ribbons.html", "rainbow-ribbons.webmanifest", "ribbon-hunt.html", "ribbon-hunt.webmanifest"];
+var FILES = ["./", "icon-my-games-180.png", "icon-my-games-192.png", "icon-my-games-512.png", "icon-rainbow-ribbons-180.png", "icon-rainbow-ribbons-192.png", "icon-rainbow-ribbons-512.png", "icon-ribbon-hunt-180.png", "icon-ribbon-hunt-192.png", "icon-ribbon-hunt-512.png", "index.html", "my-games.webmanifest", "rainbow-ribbons.html", "rainbow-ribbons.webmanifest", "ribbon-hunt.html", "ribbon-hunt.webmanifest", "icon-ribbon-hunt-2-180.png", "icon-ribbon-hunt-2-192.png", "icon-ribbon-hunt-2-512.png", "ribbon-hunt-2.html", "ribbon-hunt-2.webmanifest"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(FILES); }).then(function () { return self.skipWaiting(); }));
 });
