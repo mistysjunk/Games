@@ -1749,17 +1749,85 @@ var RH = (function () {
 })(RH);
 
 </script>
+<script>/* rr-food-1.js */
+/* Rainbow Ribbons — extra-easy food drawings (5 lines, no tricky lines), mixed in with the easy animals */
+(function (H) {
+  "use strict";
+  var TAU = H.TAU, VW = H.VW, VH = H.VH, OX = H.OX, OY = H.OY, STEP_W = H.STEP_W, UPW = H.UPW, SPEED = H.SPEED, PAL = H.PAL, L = H.L, arc = H.arc, ell = H.ell, C = H.C, join = H.join, middle = H.middle, shrink = H.shrink, dense = H.dense, back = H.back, tidy = H.tidy, flip = H.flip, place = H.place, onto = H.onto, tent = H.tent, frill = H.frill, heart = H.heart, round4 = H.round4, squircle = H.squircle, beads = H.beads, spark = H.spark, bloom = H.bloom, D = H.D, brush = H.brush, fringe = H.fringe, coil = H.coil, rays = H.rays, lace = H.lace, ruffle = H.ruffle, leaf = H.leaf, wavy = H.wavy, taper = H.taper, twist = H.twist, scaleBy = H.scaleBy, star5 = H.star5, linkUp = H.linkUp, rot = H.rot, rotL = H.rotL, sampleAt = H.sampleAt, loops = H.loops, teeth = H.teeth, combs = H.combs, strands = H.strands, eyeF = H.eyeF, eyeShut = H.eyeShut, iris = H.iris, lipsF = H.lipsF, crownSpikes = H.crownSpikes, scrolls = H.scrolls, gemOval = H.gemOval, drop = H.drop, twk = H.twk, dots = H.dots, rose = H.rose, flake = H.flake, shell = H.shell, feather = H.feather, trick = H.trick, linkLines = H.linkLines, cutOut = H.cutOut, scl = H.scl, sclL = H.sclL, sclD = H.sclD, snake = H.snake, wing = H.wing, FAY = H.FAY, FW = H.FW, box = H.box, ribs = H.ribs, bow2 = H.bow2, wingsAt = H.wingsAt, owlAt = H.owlAt, doveAt = H.doveAt, amphora = H.amphora, plume = H.plume, ribbon = H.ribbon, hand = H.hand, fingerSet = H.fingerSet, handB = H.handB, fingertips = H.fingertips, LIPS34 = H.LIPS34, lipsAs = H.lipsAs, SHAPE34 = H.SHAPE34, FACE34 = H.FACE34, PROF_F = H.PROF_F, mirL = H.mirL, CAL_FACE = H.CAL_FACE, birdK = H.birdK, armH = H.armH, crescentAt = H.crescentAt, frameAt = H.frameAt, keyBand = H.keyBand, flameAt = H.flameAt, oilLamp = H.oilLamp, cloudAt = H.cloudAt, butterflyAt = H.butterflyAt, swallowAt = H.swallowAt, wingF = H.wingF, frond = H.frond, lilyAt = H.lilyAt, wheatEar = H.wheatEar, wheatBend = H.wheatBend, poppyAt = H.poppyAt, beeAt = H.beeAt, pineAt = H.pineAt, bflyAt = H.bflyAt, petalSides = H.petalSides, petalPeek = H.petalPeek, aquaGlyph = H.aquaGlyph, ZT = H.ZT, ramHorn = H.ramHorn, ariesGlyph = H.ariesGlyph, sunAt = H.sunAt, stemmed = H.stemmed, geminiGlyph = H.geminiGlyph, mirX = H.mirX, mirXL = H.mirXL, cancerGlyph = H.cancerGlyph, finWing = H.finWing, starfish = H.starfish, leoGlyph = H.leoGlyph, sunFace = H.sunFace, virgoGlyph = H.virgoGlyph, leafWing = H.leafWing, libraGlyph = H.libraGlyph, featherAt = H.featherAt, scorpioGlyph = H.scorpioGlyph, lotusAt = H.lotusAt, sailFin = H.sailFin, sagGlyph = H.sagGlyph, capGlyph = H.capGlyph, piscesGlyph = H.piscesGlyph, fishAt = H.fishAt, fluff = H.fluff, cypressAt = H.cypressAt, mirD = H.mirD, dolphinAt = H.dolphinAt, seahorseAt = H.seahorseAt, waveCurl = H.waveCurl, bubbles = H.bubbles, measure = H.measure;
+  /* extra-easy food pictures: 5 lines each, no tricky lines, mixed in among the 5-line animals */
+  function mx(p, x) { return p.map(function (q) { return [2 * x - q[0], q[1]]; }); }
+
+  var RR_BURGER5 = (function () { // a big hamburger with a box of fries beside it
+    var bun = linkUp([C([[14, 52], [16, 38], [26, 28], [40, 24], [54, 28], [64, 38], [66, 52], [14, 52]]), C([[16, 72], [17, 79], [24, 82], [56, 82], [63, 79], [64, 72], [16, 72]]),
+                      ell(28, 36, 1.2, 0.7), ell(38, 31, 1.2, 0.7), ell(48, 34, 1.2, 0.7), ell(56, 41, 1.2, 0.7), ell(34, 43, 1.2, 0.7)], "hide");   // the top bun with seeds and the bottom bun
+    var fill = linkUp([wavy(C([[12, 55], [40, 55], [68, 55]]), 8, 1.6), C([[14, 58], [66, 58], [66, 64], [14, 64], [14, 58]]), C([[15, 67], [30, 70.6], [40, 67], [52, 70.6], [65, 67], [66, 69], [14, 69], [15, 67]])], "hide");   // lettuce, the patty and cheese
+    var fries = linkUp([C([[70, 56], [72, 82], [92, 82], [94, 56], [82, 59.4], [70, 56]]), heart(82, 72, 3),
+                        L([73, 57], [71, 30], [74.4, 30], [76, 58]), L([77, 58.4], [77, 24], [80.4, 24], [80.4, 59]), L([83, 59], [84, 26], [87.4, 26.4], [86.4, 58.6]), L([89, 58], [91, 34], [94, 34.6], [92, 57])], "hide");   // a box of fries
+    var face = linkUp([ell(32, 44, 1.6), ell(48, 44, 1.6), arc(40, 46, 3, 2.4, 20, 160)], "hide");                                      // a happy face on the bun
+    var table = linkUp([C([[2, 86], [50, 85.4], [98, 86]]), spark(10, 16, 2), spark(88, 12, 1.6), star5(60, 10, 1.6)], "hide");           // the table and sparkles
+    return { strokes: [bun, fill, fries, face, table], thin: [3], slim: false, details: D(dots([[30, 8], [4, 40], [96, 94], [40, 94]])) };
+  })();
+
+  var RR_PIZZA5 = (function () { // a big slice of pizza with pepperoni and dripping cheese
+    var slice = linkUp([C([[18, 22], [50, 14], [82, 22]]), C([[82, 22], [64, 52], [50, 88], [36, 52], [18, 22]])], "hide");                  // the slice
+    var crust = linkUp([C([[16, 22], [16, 16], [30, 10], [50, 7], [70, 10], [84, 16], [84, 22]]), C([[30, 16], [34, 14.4]]), C([[48, 11.6], [53, 11.6]]), C([[66, 14.4], [70, 16]])], "hide");   // the puffy crust
+    var pepperoni = linkUp([ell(38, 30, 5), ell(62, 30, 5), ell(50, 50, 5), ell(46, 68, 3.6), ell(38, 30, 2), ell(62, 30, 2), ell(50, 50, 2)], "hide");   // pepperoni
+    var drips = linkUp([C([[36, 52], [35.4, 60], [37, 62], [38.6, 60], [38, 54]]), C([[63, 54], [63.4, 62], [65, 64], [66.4, 62], [65, 52]]), C([[26, 36], [24, 42], [26, 44], [28, 41], [28, 38]])], "hide");   // melted cheese drips
+    var plate = linkUp([C([[4, 92], [50, 96], [96, 92]]), C([[4, 92], [50, 88], [96, 92]]), leaf([22, 74], [14, 66], 0.3, true), leaf([78, 74], [86, 66], 0.3, true), spark(90, 40, 2), spark(10, 50, 1.6)], "hide");   // a plate, basil leaves and sparkles
+    return { strokes: [slice, crust, pepperoni, drips, plate], thin: [3], slim: false, details: D(dots([[8, 10], [94, 8], [6, 78], [94, 78]])) };
+  })();
+
+  var RR_ICECREAM5 = (function () { // an ice cream cone with two scoops and a cherry on top
+    var cone = linkUp([C([[34, 54], [50, 94], [66, 54]]), L([34.8, 56], [59.6, 70]), L([65.2, 56], [40.4, 70]), L([38.0, 64], [56.4, 78]), L([62.0, 64], [43.6, 78]), L([41.2, 72], [53.2, 86]), L([58.8, 72], [46.8, 86])], "hide");   // the waffle cone
+    var scoop1 = linkUp([C([[32, 56], [30, 46], [36, 38], [50, 35], [64, 38], [70, 46], [68, 56]]), wavy(C([[32, 56], [50, 57], [68, 56]]), 6, 1.6)], "hide");   // the bottom scoop
+    var scoop2 = linkUp([C([[36, 40], [34, 30], [40, 22], [50, 20], [60, 22], [66, 30], [64, 40]]), wavy(C([[36, 38], [50, 40], [64, 38]]), 5, 1.4)], "hide");   // the top scoop
+    var cherry = linkUp([ell(50, 16, 4), C([[50, 12], [52, 6], [57, 3]]), L([42, 28], [44, 26]), L([56, 26], [58, 28]), L([48, 32], [50, 30]), L([40, 48], [42, 46]), L([58, 46], [60, 48]), L([50, 50], [52, 48])], "hide");   // a cherry and sprinkles
+    var sky = linkUp([heart(16, 20, 3), heart(84, 26, 2.6), spark(20, 66, 2), spark(82, 64, 1.8), star5(86, 8, 1.6), star5(12, 44, 1.4)], "hide");   // hearts and sparkles
+    return { strokes: [cone, scoop1, scoop2, cherry, sky], thin: [3], slim: false, details: D(dots([[30, 8], [70, 6], [6, 90], [94, 90]])) };
+  })();
+
+  var RR_SUSHI5 = (function () { // two sushi rolls and a piece of salmon sushi on a little board, with chopsticks
+    function roll(x, y) { return [ell(x, y, 11, 5), C([[x - 11, y], [x - 11, y + 12], [x, y + 17], [x + 11, y + 12], [x + 11, y]]), ell(x, y, 7, 3.2), ell(x, y, 3, 1.4)]; }
+    var rolls = linkUp([].concat(roll(26, 49), roll(52, 49)), "hide");                                                               // two sushi rolls
+    var nigiri = linkUp([C([[64, 66], [64, 60], [72, 56], [88, 56], [94, 60], [94, 66], [64, 66]]), C([[62, 58], [70, 50], [86, 49], [96, 54], [94, 58], [86, 55], [70, 56], [62, 58]]),
+                         L([72, 55.4], [76, 51]), L([79, 55], [83, 50.4]), L([86, 55], [89, 51])], "hide");                               // salmon on a bed of rice
+    var board = linkUp([L([6, 66], [94, 66], [96, 72], [4, 72], [6, 66]), L([14, 72], [14, 76]), L([86, 72], [86, 76])], "hide");   // the wooden board
+    var sticks = linkUp([L([18, 86], [96, 80]), L([16, 90], [96, 84])], "hide");                                                       // chopsticks
+    var extras = linkUp([ell(20, 18, 7, 3), C([[13, 18], [14, 24], [20, 26], [26, 24], [27, 18]]), leaf([60, 30], [72, 20], 0.3, true), spark(86, 20, 2), spark(44, 14, 1.6)], "hide");   // a soy sauce dish, a leaf and sparkles
+    return { strokes: [rolls, nigiri, board, sticks, extras], thin: [4], slim: false, details: D(dots([[94, 6], [4, 50], [96, 40], [50, 96]])) };
+  })();
+
+  var RR_CUPCAKE5 = (function () { // a cupcake with swirly frosting, sprinkles and a cherry
+    var wrapper = linkUp([C([[30, 56], [34, 86], [66, 86], [70, 56]]), L([38, 57], [40, 86]), L([46, 57], [47, 86]), L([54, 57], [53, 86]), L([62, 57], [60, 86])], "hide");   // the striped paper cup
+    var frosting = linkUp([C([[26, 56], [24, 48], [30, 42], [26, 36], [32, 28], [42, 26], [44, 18], [52, 14], [60, 18], [62, 26], [70, 30], [74, 38], [70, 44], [76, 50], [74, 56], [26, 56]]),
+                           C([[32, 44], [50, 46], [68, 44]]), C([[36, 32], [50, 34], [64, 32]])], "hide");                                   // swirly frosting
+    var cherry = linkUp([ell(52, 10, 4), C([[52, 6], [54, 1], [59, -1]]), L([36, 50], [38, 48]), L([46, 52], [48, 50]), L([58, 50], [60, 52]), L([42, 38], [44, 36]), L([54, 40], [56, 38]), L([48, 28], [50, 26])], "hide");   // a cherry and sprinkles
+    var face = linkUp([ell(43, 70, 1.6), ell(57, 70, 1.6), arc(50, 72, 3.4, 2.6, 20, 160), arc(38, 74, 2, 1, 0, 180), arc(62, 74, 2, 1, 0, 180)], "hide");   // a sweet face on the cup
+    var table = linkUp([C([[4, 90], [50, 89.4], [96, 90]]), heart(16, 30, 3), heart(86, 22, 2.6), spark(14, 70, 2), spark(86, 64, 1.8)], "hide");   // the table, hearts and sparkles
+    return { strokes: [wrapper, frosting, cherry, face, table], thin: [3], slim: false, details: D(dots([[30, 6], [80, 6], [4, 50], [96, 44]])) };
+  })();
+
+  H.art = H.art || {};
+  H.art.RR_BURGER5 = RR_BURGER5; H.art.RR_PIZZA5 = RR_PIZZA5; H.art.RR_ICECREAM5 = RR_ICECREAM5; H.art.RR_SUSHI5 = RR_SUSHI5; H.art.RR_CUPCAKE5 = RR_CUPCAKE5;
+})(RH);
+
+</script>
 <script>/* rr-chapters.js */
 /* Rainbow Ribbons — the chapter list. Add each new drawing to the end of its chapter. Never change an id (Found marks are kept by id). */
-RH.VERSION = 5;
+RH.VERSION = 6;
 RH.CHAPTERS = [
   { name: "Animals", items: [
-    /* Nov 15: extra-easy animals at the start — five with 5 lines, then three with 7 lines */
+    /* Nov 15: extra-easy pictures at the start — 5-line animals and foods mixed together, then three 7-line animals */
     { id: "rr-bunny-5", name: "Bunny with a Heart", hue: "P", art: RH.art.RR_BUNNY5 },
+    { id: "rr-burger-5", name: "Burger and Fries", hue: "O", art: RH.art.RR_BURGER5 },
     { id: "rr-puppy-5", name: "Sleepy Puppy", hue: "C", art: RH.art.RR_PUPPY5 },
+    { id: "rr-pizza-5", name: "Pizza Slice", hue: "R", art: RH.art.RR_PIZZA5 },
     { id: "rr-pony-5", name: "Trotting Pony", hue: "O", art: RH.art.RR_PONY5 },
+    { id: "rr-icecream-5", name: "Ice Cream Cone", hue: "P", art: RH.art.RR_ICECREAM5 },
     { id: "rr-panda-5", name: "Panda Napping on a Branch", hue: "N", art: RH.art.RR_PANDA5 },
+    { id: "rr-sushi-5", name: "Sushi", hue: "C", art: RH.art.RR_SUSHI5 },
     { id: "rr-kitten-5", name: "Kitten in a Teacup", hue: "V", art: RH.art.RR_KITTEN5 },
+    { id: "rr-cupcake-5", name: "Cupcake", hue: "G", art: RH.art.RR_CUPCAKE5 },
     { id: "rr-kitten-7", name: "Kitten and Her Yarn", hue: "R", art: RH.art.RR_KITTEN7 },
     { id: "rr-duck-7", name: "Duck and Ducklings", hue: "G", art: RH.art.RR_DUCK7 },
     { id: "rr-puppy-7", name: "Puppy in a Flower Basket", hue: "B", art: RH.art.RR_PUPPY7 },
