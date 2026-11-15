@@ -1618,11 +1618,151 @@ var RH = (function () {
 })(RH);
 
 </script>
+<script>/* rr-animals-4.js */
+/* Rainbow Ribbons — Animals, extra-easy drawings (5 and 7 lines, no tricky lines) */
+(function (H) {
+  "use strict";
+  var TAU = H.TAU, VW = H.VW, VH = H.VH, OX = H.OX, OY = H.OY, STEP_W = H.STEP_W, UPW = H.UPW, SPEED = H.SPEED, PAL = H.PAL, L = H.L, arc = H.arc, ell = H.ell, C = H.C, join = H.join, middle = H.middle, shrink = H.shrink, dense = H.dense, back = H.back, tidy = H.tidy, flip = H.flip, place = H.place, onto = H.onto, tent = H.tent, frill = H.frill, heart = H.heart, round4 = H.round4, squircle = H.squircle, beads = H.beads, spark = H.spark, bloom = H.bloom, D = H.D, brush = H.brush, fringe = H.fringe, coil = H.coil, rays = H.rays, lace = H.lace, ruffle = H.ruffle, leaf = H.leaf, wavy = H.wavy, taper = H.taper, twist = H.twist, scaleBy = H.scaleBy, star5 = H.star5, linkUp = H.linkUp, rot = H.rot, rotL = H.rotL, sampleAt = H.sampleAt, loops = H.loops, teeth = H.teeth, combs = H.combs, strands = H.strands, eyeF = H.eyeF, eyeShut = H.eyeShut, iris = H.iris, lipsF = H.lipsF, crownSpikes = H.crownSpikes, scrolls = H.scrolls, gemOval = H.gemOval, drop = H.drop, twk = H.twk, dots = H.dots, rose = H.rose, flake = H.flake, shell = H.shell, feather = H.feather, trick = H.trick, linkLines = H.linkLines, cutOut = H.cutOut, scl = H.scl, sclL = H.sclL, sclD = H.sclD, snake = H.snake, wing = H.wing, FAY = H.FAY, FW = H.FW, box = H.box, ribs = H.ribs, bow2 = H.bow2, wingsAt = H.wingsAt, owlAt = H.owlAt, doveAt = H.doveAt, amphora = H.amphora, plume = H.plume, ribbon = H.ribbon, hand = H.hand, fingerSet = H.fingerSet, handB = H.handB, fingertips = H.fingertips, LIPS34 = H.LIPS34, lipsAs = H.lipsAs, SHAPE34 = H.SHAPE34, FACE34 = H.FACE34, PROF_F = H.PROF_F, mirL = H.mirL, CAL_FACE = H.CAL_FACE, birdK = H.birdK, armH = H.armH, crescentAt = H.crescentAt, frameAt = H.frameAt, keyBand = H.keyBand, flameAt = H.flameAt, oilLamp = H.oilLamp, cloudAt = H.cloudAt, butterflyAt = H.butterflyAt, swallowAt = H.swallowAt, wingF = H.wingF, frond = H.frond, lilyAt = H.lilyAt, wheatEar = H.wheatEar, wheatBend = H.wheatBend, poppyAt = H.poppyAt, beeAt = H.beeAt, pineAt = H.pineAt, bflyAt = H.bflyAt, petalSides = H.petalSides, petalPeek = H.petalPeek, aquaGlyph = H.aquaGlyph, ZT = H.ZT, ramHorn = H.ramHorn, ariesGlyph = H.ariesGlyph, sunAt = H.sunAt, stemmed = H.stemmed, geminiGlyph = H.geminiGlyph, mirX = H.mirX, mirXL = H.mirXL, cancerGlyph = H.cancerGlyph, finWing = H.finWing, starfish = H.starfish, leoGlyph = H.leoGlyph, sunFace = H.sunFace, virgoGlyph = H.virgoGlyph, leafWing = H.leafWing, libraGlyph = H.libraGlyph, featherAt = H.featherAt, scorpioGlyph = H.scorpioGlyph, lotusAt = H.lotusAt, sailFin = H.sailFin, sagGlyph = H.sagGlyph, capGlyph = H.capGlyph, piscesGlyph = H.piscesGlyph, fishAt = H.fishAt, fluff = H.fluff, cypressAt = H.cypressAt, mirD = H.mirD, dolphinAt = H.dolphinAt, seahorseAt = H.seahorseAt, waveCurl = H.waveCurl, bubbles = H.bubbles, measure = H.measure;
+  /* every drawing here is extra easy: 5 lines (the first five) or 7 lines (the last three), no tricky lines; each line is one clear part of the picture */
+  function mx(p, x) { return p.map(function (q) { return [2 * x - q[0], q[1]]; }); }   // mirror left to right about x
+
+  var RR_BUNNY5 = (function () { // a bunny facing you, sitting with her paws together, a heart above her
+    var body = linkUp([ell(50, 36, 15, 13),
+                       C([[40, 46], [33, 56], [31, 68], [33, 79], [40, 85], [50, 86.4], [60, 85], [67, 79], [69, 68], [67, 56], [60, 46]]),
+                       ell(40, 87, 7, 3.6), ell(60, 87, 7, 3.6)], "hide");                                                         // her round head, plump body and two feet
+    var earL = C([[44, 24.4], [39, 14], [38, 5], [41.4, 1.4], [45.4, 5], [47.4, 14], [47.6, 23.4]]), earInL = C([[41.4, 8], [42.4, 15], [44.6, 21]]);
+    var ears = linkUp([earL, earInL, mx(earInL, 50), mx(earL, 50)], "hide");                                                           // two tall ears
+    var face = linkUp([ell(44, 34, 1.9), ell(44.6, 33.3, 0.6), ell(56, 34, 1.9), ell(56.6, 33.3, 0.6),
+                       heart(50, 40.2, 1.6), C([[50, 40.2], [50, 41.6], [47.6, 43]]), C([[50, 41.6], [52.4, 43]]),
+                       arc(40, 40, 2, 1, 0, 180), arc(60, 40, 2, 1, 0, 180)], "hide");                                                    // eyes, a heart nose, smile and rosy cheeks
+    var paws = linkUp([ell(50, 72, 8, 9.6), C([[40.4, 55], [44.6, 54], [47.4, 57], [45.4, 60.4], [41, 60], [39.4, 57.4], [40.4, 55]]), L([43, 58], [43.4, 60.2]), mx(L([43, 58], [43.4, 60.2]), 50), mx(C([[40.4, 55], [44.6, 54], [47.4, 57], [45.4, 60.4], [41, 60], [39.4, 57.4], [40.4, 55]]), 50)], "hide");                                         // her tummy and paws
+    var scene = linkUp([C([[2, 92], [30, 91.4], [70, 92.2], [98, 91.4]]), heart(82, 20, 4), bloom(14, 84, 2.4), C([[14, 86.4], [14, 91.6]]), bloom(88, 85, 2.4), C([[88, 87.4], [88, 91.6]]), spark(16, 20, 2)], "hide");   // the grass, two flowers, a heart and a sparkle
+    return { strokes: [body, ears, face, paws, scene], thin: [2], slim: false, details: D(dots([[30, 8], [70, 6], [94, 50], [6, 52]])) };
+  })();
+
+  var RR_PUPPY5 = (function () { // a puppy fast asleep on a soft cushion, the moon and a few stars above
+    var body = linkUp([C([[33, 48], [46, 45], [60, 45.6], [72, 49], [79, 57], [78.6, 65], [74, 70.6], [60, 72], [44, 72], [32, 71]]),
+                       C([[34, 72], [20, 73.4], [9, 73.4], [6.4, 71], [8.6, 68.6], [14, 68.2]]),
+                       arc(68, 63, 8, 7, 200, 340), C([[78.6, 58], [86, 54], [90, 47.6], [88.4, 43.4]])], "hide");                    // her body lying down, front paw stretched out, back leg and tail
+    var head = linkUp([C([[33, 48], [29, 44.4], [23, 43], [16, 45.4], [11.6, 50.4], [8.4, 54.6], [5.6, 58], [6, 62.4], [9.6, 65.4], [18, 66.6], [26, 67], [32, 65]]),
+                       C([[24, 46.4], [30.6, 49], [33.4, 56.6], [31.4, 64], [27.6, 66.6], [25.4, 60], [24, 50]])], "hide");             // her head, snout and floppy ear
+    var face = linkUp([arc(17.4, 54, 2.6, 1.6, 20, 160), ell(7, 59.2, 1.3), C([[9.6, 63], [12.4, 64.2], [15.2, 63]])], "hide");        // a sleeping eye, her nose and smile
+    var bed = linkUp([C([[5, 72], [2.4, 80], [6, 86.4], [50, 88.4], [94, 86.4], [97.6, 80], [95, 72]]), C([[5, 77.6], [50, 81], [95, 77.6]])], "hide");   // her soft cushion
+    var sky = linkUp([arc(78, 18, 8, 8, 60, 300), C([[82, 10.6], [76.6, 14], [76.6, 22], [82, 25.4]]), L([40, 30], [46, 30], [40, 36], [46, 36]), L([50, 20], [55, 20], [50, 25], [55, 25]),
+                      star5(16, 16, 2.4), star5(92, 40, 1.8), star5(62, 8, 1.6)], "hide");                                               // the moon, sleepy z's and stars
+    return { strokes: [body, head, face, bed, sky], thin: [2], slim: false, details: D(dots([[30, 8], [8, 34], [96, 62], [52, 94]])) };
+  })();
+
+  var RR_PONY5 = (function () { // a little pony trotting through the meadow, one front hoof lifted, mane and tail flying
+    var body = linkUp([C([[60, 42], [46, 43.4], [33, 42], [26, 46], [24, 54], [28, 60.6], [36, 62], [50, 62.6], [62, 61], [68, 55]]),
+                       C([[30, 60], [28, 72], [26.6, 84], [30.6, 84.4], [32.4, 72], [35.4, 62]]), L([26.6, 84], [26, 87], [31.4, 87], [30.6, 84.4]),
+                       C([[39, 62.4], [39.4, 74], [40, 85], [44, 85], [43.6, 74], [44, 62.6]]), L([40, 85], [39.6, 88], [44.6, 88], [44, 85]),
+                       C([[56, 62], [57, 74], [58, 85], [62, 85], [61.4, 74], [61, 61.4]]), L([58, 85], [57.6, 88], [62.6, 88], [62, 85]),
+                       C([[67, 57], [71.6, 64], [72, 71], [69.6, 78]]), C([[62, 61.4], [65.6, 66], [66.4, 71], [65, 77]]), L([69.6, 78], [70.4, 81], [65.2, 80.4], [65, 77])], "hide");   // her round body and four legs, one hoof lifted
+    var head = linkUp([C([[58, 42.4], [62, 35], [67, 28], [72, 23.4], [78, 22], [84, 25], [90, 32], [92.6, 37.6], [91, 41.6], [86, 42], [80, 39.6], [76, 43], [72, 49], [68, 55]]),
+                       C([[72.4, 23.6], [71.6, 16], [75, 18], [76.6, 22.2]])], "hide");                                                 // her neck, head and ear
+    var face = linkUp([ell(78.4, 30, 1.7), ell(78.9, 29.4, 0.5), C([[76.8, 28.4], [75.8, 27.6]]), ell(88.6, 37.4, 0.8), C([[86, 41], [88.4, 41.6], [90.4, 41]])], "hide");   // her eye, nostril and mouth
+    var hair = linkUp([wavy(C([[71, 22.6], [65.4, 28], [60.6, 35], [56, 42]]), 4, 2), wavy(C([[73, 23.2], [69, 27], [66, 31]]), 2, 1.4),
+                       wavy(C([[24.6, 50], [16, 52], [11, 60], [10, 72]]), 4, 2), wavy(C([[24.4, 52], [19, 56], [16, 64], [16, 72]]), 3, 1.4)], "hide");   // her flowing mane and tail
+    var meadow = linkUp([C([[2, 90], [30, 89.4], [70, 90.2], [98, 89.4]]), bloom(12, 84, 2.4), C([[12, 86.4], [12, 89.6]]), bloom(88, 84, 2.4), C([[88, 86.4], [88, 89.6]]),
+                         sunAt(16, 16, 5, 10), cloudAt(36, 14, [[2, 2.2], [5.4, 3], [9, 2.2]])], "hide");                                      // the meadow, flowers, sun and a cloud
+    return { strokes: [body, head, face, hair, meadow], thin: [2], slim: false, details: D(dots([[56, 8], [96, 56], [4, 40], [50, 96]])) };
+  })();
+
+  var RR_PANDA5 = (function () { // a panda napping on a tree branch, arms and legs dangling, leaves around her
+    var branch = linkUp([C([[0, 60], [30, 58], [60, 57], [90, 59], [100, 58.6]]), C([[0, 66], [30, 64.6], [60, 63.6], [90, 65.4], [100, 65]]), C([[76, 58.4], [84, 50], [90, 44]])], "hide");   // the branch
+    var body = linkUp([C([[34, 57.6], [36, 48], [46, 43.4], [60, 44], [70, 50], [72, 57.6]]),
+                       C([[38, 64], [36, 72], [37.6, 80], [42, 80], [43.4, 72], [44, 64]]), C([[50, 64], [49.6, 74], [51.6, 82], [56, 82], [56.6, 74], [56, 64]]),
+                       C([[62, 64], [62.4, 72], [64, 78], [68, 78], [68.4, 71], [67.6, 63.6]])], "hide");                                    // her round back and three dangling paws
+    var head = linkUp([C([[34, 57.6], [28, 60], [20, 60], [14, 56], [13, 48], [18, 42], [26, 40.6], [33, 44], [35, 51]]), arc(16, 42.4, 3.6, 3.6, 120, 330), arc(30, 41.4, 3.6, 3.6, 210, 420)], "hide");   // her round head and ears
+    var face = linkUp([C([[17, 49], [19.6, 46.6], [22, 48], [20.6, 51.6], [17.6, 52], [17, 49]]), arc(19.4, 49.4, 1.4, 0.8, 20, 160),
+                       C([[26, 48], [28.4, 46.6], [31, 49], [30.4, 52], [27.4, 51.6], [26, 48]]), arc(28, 49.4, 1.4, 0.8, 20, 160),
+                       heart(23.6, 54, 1.4), C([[23.6, 54], [23.6, 55.4], [21.8, 56.4]]), C([[23.6, 55.4], [25.4, 56.4]])], "hide");          // her sleepy eye patches, nose and smile
+    var leaves = linkUp([leaf([88, 46], [96, 38], 0.3, true), leaf([86, 48], [80, 40], 0.3, true), leaf([20, 60], [14, 70], 0.3, true), leaf([8, 62], [4, 72], 0.3, true),
+                         arc(80, 18, 6, 6, 60, 300), C([[83, 12.4], [78.6, 15], [78.6, 21], [83, 23.6]]), star5(50, 18, 2), star5(20, 14, 1.6)], "hide");   // leaves, the moon and stars
+    return { strokes: [branch, body, head, face, leaves], thin: [3], slim: false, details: D(dots([[60, 6], [96, 80], [4, 30], [80, 94]])) };
+  })();
+
+  var RR_KITTEN5 = (function () { // a kitten peeking out of a big teacup, her paws on the rim, little hearts rising like steam
+    var cup = linkUp([ell(50, 56, 24, 5), C([[26, 56], [28, 72], [36, 82], [50, 85], [64, 82], [72, 72], [74, 56]]),
+                      C([[73, 62], [82, 60], [86, 65], [82, 72], [70, 74]]), C([[72.4, 65.4], [79, 64], [80.6, 67.4], [70.6, 70]]),
+                      C([[14, 86], [30, 90.6], [50, 91.6], [70, 90.6], [86, 86], [70, 83], [62, 82.6]]), C([[38, 82.6], [30, 83], [14, 86]])], "hide");   // the teacup, its handle and saucer
+    var head = linkUp([C([[34.2, 52.4], [33, 46], [36, 39], [34, 30], [42, 34.6], [50, 33.6], [58, 34.6], [66, 30], [64, 39], [67, 46], [65.8, 52.4]]),
+                       C([[36.4, 33], [38, 37.4]]), C([[63.6, 33], [62, 37.4]])], "hide");                                                // her round head and pointed ears
+    var face = linkUp([ell(43.6, 44, 2), ell(44.2, 43.3, 0.6), ell(56.4, 44, 2), ell(57, 43.3, 0.6), heart(50, 48.6, 1.4), C([[50, 48.6], [50, 50], [47.8, 51.2]]), C([[50, 50], [52.2, 51.2]]),
+                       C([[46, 48.6], [38, 47.4]]), C([[46, 49.6], [38.4, 50.6]]), C([[54, 48.6], [62, 47.4]]), C([[54, 49.6], [61.6, 50.6]])], "hide");   // eyes, nose, smile and whiskers
+    var paws = linkUp([C([[34, 57], [33.4, 53], [37.4, 52], [41, 53.6], [41.4, 57.6]]), L([36.4, 53], [36.6, 55.6]), L([39, 53], [39, 55.6]),
+                       C([[58.6, 57.6], [59, 53.6], [62.6, 52], [66.6, 53], [66, 57]]), L([61, 53], [61, 55.6]), L([63.6, 53], [63.4, 55.6]), heart(50, 72, 4)], "hide");   // her paws on the rim and a heart on the cup
+    var steam = linkUp([heart(30, 24, 2.6), heart(72, 18, 3.2), heart(50, 12, 2.2), spark(84, 40, 2), spark(16, 44, 1.6), star5(20, 10, 1.6)], "hide");   // little hearts rising, and sparkles
+    return { strokes: [cup, head, face, paws, steam], thin: [2], slim: false, details: D(dots([[90, 20], [6, 70], [94, 72], [40, 6]])) };
+  })();
+
+  var RR_KITTEN7 = (function () { // a kitten sitting sideways, batting at a ball of yarn with one paw, her tail curled up
+    var body = linkUp([C([[36, 44], [30, 52], [27, 64], [28, 76], [32, 84], [42, 87], [56, 87], [64, 82], [64, 72], [58, 62], [52, 54], [50, 46]])], "hide");   // her body sitting up
+    var head = linkUp([C([[30, 32], [30, 24], [26, 12], [35, 18], [42, 17], [49, 18], [57, 11], [55, 22], [56, 30], [52, 39], [44, 43], [36, 42], [31, 38], [30, 32]]),
+                       C([[29.4, 16], [32, 21]]), C([[54.6, 14.6], [53.4, 20.4]])], "hide");                                              // her head and pointed ears
+    var face = linkUp([ell(38, 28, 2), ell(38.6, 27.3, 0.6), ell(49, 28, 2), ell(49.6, 27.3, 0.6), heart(43.6, 32.6, 1.3), C([[43.6, 32.6], [43.6, 34], [41.6, 35.2]]), C([[43.6, 34], [45.6, 35.2]]),
+                       C([[40, 33], [32, 32]]), C([[40, 34.2], [32.4, 35.6]]), C([[47.4, 33], [55, 32]]), C([[47.4, 34.2], [54.6, 35.6]])], "hide");   // eyes, nose, smile and whiskers
+    var paws = linkUp([C([[50, 46], [58, 48], [66, 50], [72, 48.6], [73.4, 52], [70, 54.6], [62, 55], [54, 54]]), L([71, 49.6], [70.2, 53.4]),
+                       C([[38, 68], [38.6, 80], [37, 86.6], [42, 87.6], [43.6, 80], [43, 68]]), C([[30, 80], [24, 84], [24, 88], [32, 88.4], [36, 86]])], "hide");   // her reaching paw, front leg and back foot
+    var tail = linkUp([C([[60, 84.6], [70, 86.6], [78, 84], [81, 78], [79, 72], [76.4, 71.4], [75.6, 74], [76.4, 78], [73, 81.4], [62, 81]]),
+                       C([[33, 44.6], [42, 47.6], [51, 45.4]]), ell(42, 50, 1.7)], "hide");                                                // her curled tail and collar with a bell
+    var yarn = linkUp([ell(82, 46, 7), C([[76, 42], [82, 46.4], [88, 42]]), C([[76.4, 49.6], [82, 46.4], [88.6, 49.4]]), C([[82, 39], [80.4, 46], [82, 53]]),
+                       C([[87, 51], [93, 56], [96, 64], [92, 72], [96, 80], [99, 84]])], "hide");                                         // a ball of yarn and its loose strand
+    var room = linkUp([C([[2, 90], [30, 89.6], [70, 90.4], [98, 89.6]]), heart(16, 14, 3), heart(72, 12, 2.4), spark(88, 24, 1.8), spark(10, 50, 1.6), bloom(10, 84, 2.2), C([[10, 86.2], [10, 89.6]])], "hide");   // the floor, hearts, sparkles and a flower
+    return { strokes: [body, head, face, paws, tail, yarn, room], thin: [2], slim: false, details: D(dots([[60, 4], [94, 4], [4, 30], [60, 96]])) };
+  })();
+
+  var RR_DUCK7 = (function () { // a mother duck swimming with two ducklings behind her, cattails and a lily pad by the shore
+    var duck = linkUp([C([[30, 58], [36, 52], [48, 50], [58, 52], [62, 46], [60, 38], [62, 30], [68, 26], [75, 27], [79, 32], [79, 38], [76, 44], [72, 50], [74, 58], [70, 64], [56, 68], [40, 68], [32, 64], [30, 58]]),
+                       C([[30, 58], [24, 53], [27, 60], [30, 58]])], "hide");                                                              // the mother duck's body, neck and tail
+    var beak = linkUp([C([[78.6, 34], [86, 34.6], [88, 37], [85, 38.6], [78.6, 38.4]]), L([79, 36.4], [86, 36.4]), ell(72.6, 33, 1.6), ell(73.2, 32.4, 0.5)], "hide");   // her beak and eye
+    var wing = linkUp([C([[40, 58], [46, 54], [56, 54], [64, 58], [60, 62], [50, 63.6], [42, 62], [38, 58]]), C([[46, 60], [52, 58.6], [58, 60]])], "hide");   // her wing
+    function chick(x, y, k) { return [C([[x - 6 * k, y], [x - 3 * k, y - 2.4 * k], [x + 1 * k, y - 2 * k], [x + 1.6 * k, y - 5 * k], [x + 4 * k, y - 7 * k], [x + 7 * k, y - 5.6 * k], [x + 7 * k, y - 3 * k], [x + 5 * k, y - 1 * k], [x + 6 * k, y + 1.4 * k], [x + 3 * k, y + 3.4 * k], [x - 3 * k, y + 3.4 * k], [x - 6 * k, y + 1 * k], [x - 7.4 * k, y - 1.6 * k], [x - 6 * k, y]]),
+                                       C([[x + 7 * k, y - 4.6 * k], [x + 9.4 * k, y - 4 * k], [x + 7 * k, y - 3.2 * k]]), ell(x + 4.6 * k, y - 5 * k, 0.6 * k), C([[x - 2 * k, y + 0.6 * k], [x + 1 * k, y - 0.4 * k], [x + 3 * k, y + 0.8 * k]])]; }
+    var chicks = linkUp([].concat(chick(24, 70, 1.25), chick(10, 82, 1.05)), "hide");                                                         // two little ducklings
+    var water = linkUp([C([[0, 70], [10, 69], [22, 70.6], [34, 69.4], [46, 70.4], [60, 69], [76, 70.4], [100, 69.4]]), C([[28, 76], [40, 75.4], [52, 76.4]]), C([[60, 80], [72, 79.4], [84, 80.4]]),
+                        C([[16, 86], [28, 85.4], [40, 86.4]]), C([[50, 92], [62, 91.4], [74, 92.4]])], "hide");                               // the pond and its ripples
+    var pad = linkUp([C([[88, 84], [80, 82], [76, 86], [80, 90], [90, 91], [98, 88], [98, 84], [90, 84.4], [88, 84]]), bloom(92, 80, 3), C([[92, 83], [91.6, 84.4]])], "hide");   // a lily pad and its flower
+    var reeds = linkUp([C([[90, 70], [90, 40], [91, 26]]), C([[89.4, 26], [89, 18], [91, 14], [93, 18], [92.6, 26], [89.4, 26]]), C([[96, 70], [96, 48], [98, 36]]), C([[97, 36], [96.6, 29], [98.6, 26], [100, 30], [99.6, 36.6], [97, 36]]),
+                        leaf([90, 66], [82, 48], 0.16, false), sunAt(14, 16, 5, 10), cloudAt(34, 14, [[2, 2.2], [5.4, 3], [9, 2.2]])], "hide");     // cattails, the sun and a cloud
+    return { strokes: [duck, beak, wing, chicks, water, pad, reeds], thin: [1], slim: false, details: D(dots([[56, 8], [80, 10], [4, 40], [50, 98]])) };
+  })();
+
+  var RR_PUPPY7 = (function () { // a puppy peeking out of a flower basket, paws over the edge, a bow on the handle
+    var basket = linkUp([ell(50, 60, 30, 5.6), C([[20, 60], [23, 76], [28, 88], [50, 91], [72, 88], [77, 76], [80, 60]]),
+                         C([[22, 68], [50, 72.6], [78, 68]]), C([[25, 78], [50, 82.4], [75, 78]]), C([[34, 64.6], [36, 89.4]]), C([[50, 65.6], [50, 91]]), C([[66, 64.6], [64, 89.4]])], "hide");   // the woven basket
+    var handle = linkUp([C([[22, 59], [24, 36], [34, 18], [50, 12], [66, 18], [76, 36], [78, 59]]), C([[50, 12], [44, 7], [40, 9], [41, 14], [50, 12], [56, 7], [60, 9], [59, 14], [50, 12]]), C([[50, 12], [46, 20]]), C([[50, 12], [54, 20]])], "hide");   // the handle with a bow
+    var head = linkUp([C([[36, 56], [35, 46], [38, 38], [44, 33], [50, 32], [56, 33], [62, 38], [65, 46], [64, 56]])], "hide");               // the puppy's round head
+    var ears = linkUp([C([[39, 36.4], [32, 36], [28, 42], [28, 50], [31, 54], [35, 50], [36, 42]]), C([[61, 36.4], [68, 36], [72, 42], [72, 50], [69, 54], [65, 50], [64, 42]])], "hide");   // her floppy ears
+    var face = linkUp([ell(44, 44, 2), ell(44.6, 43.3, 0.6), ell(56, 44, 2), ell(56.6, 43.3, 0.6), C([[47.4, 49], [50, 48], [52.6, 49], [50, 51.4], [47.4, 49]]), C([[50, 51.4], [50, 53], [47.6, 54.2]]), C([[50, 53], [52.4, 54.2]]),
+                       C([[48.6, 54.4], [48.6, 56.4], [50, 57.4], [51.4, 56.4], [51.4, 54.4]])], "hide");                                    // her eyes, nose, smile and little tongue
+    var paws = linkUp([C([[35, 62], [34.6, 57.4], [38.6, 56], [43, 57.4], [43.4, 62.6]]), L([37.6, 57], [37.8, 60]), L([40.4, 57], [40.4, 60]),
+                       C([[56.6, 62.6], [57, 57.4], [61.4, 56], [65.4, 57.4], [65, 62]]), L([59.6, 57], [59.6, 60]), L([62.4, 57], [62.2, 60])], "hide");   // her paws over the edge
+    var flowers = linkUp([bloom(24, 56, 3.4), bloom(76, 56, 3.4), bloom(28, 52, 2.4), bloom(72, 52, 2.4), leaf([22, 58], [14, 54], 0.3, true), leaf([78, 58], [86, 54], 0.3, true),
+                          bloom(10, 88, 2.4), C([[10, 90.4], [10, 95]]), bloom(90, 88, 2.4), C([[90, 90.4], [90, 95]]), C([[2, 95], [50, 94.4], [98, 95]]), heart(14, 22, 2.6), heart(86, 26, 2.2)], "hide");   // flowers in the basket and on the grass, and hearts
+    return { strokes: [basket, handle, head, ears, face, paws, flowers], thin: [4], slim: false, details: D(dots([[30, 6], [70, 4], [4, 40], [96, 46]])) };
+  })();
+
+  H.art = H.art || {};
+  H.art.RR_BUNNY5 = RR_BUNNY5; H.art.RR_PUPPY5 = RR_PUPPY5; H.art.RR_PONY5 = RR_PONY5; H.art.RR_PANDA5 = RR_PANDA5; H.art.RR_KITTEN5 = RR_KITTEN5; H.art.RR_KITTEN7 = RR_KITTEN7; H.art.RR_DUCK7 = RR_DUCK7; H.art.RR_PUPPY7 = RR_PUPPY7;
+})(RH);
+
+</script>
 <script>/* rr-chapters.js */
 /* Rainbow Ribbons — the chapter list. Add each new drawing to the end of its chapter. Never change an id (Found marks are kept by id). */
-RH.VERSION = 4;
+RH.VERSION = 5;
 RH.CHAPTERS = [
   { name: "Animals", items: [
+    /* Nov 15: extra-easy animals at the start — five with 5 lines, then three with 7 lines */
+    { id: "rr-bunny-5", name: "Bunny with a Heart", hue: "P", art: RH.art.RR_BUNNY5 },
+    { id: "rr-puppy-5", name: "Sleepy Puppy", hue: "C", art: RH.art.RR_PUPPY5 },
+    { id: "rr-pony-5", name: "Trotting Pony", hue: "O", art: RH.art.RR_PONY5 },
+    { id: "rr-panda-5", name: "Panda Napping on a Branch", hue: "N", art: RH.art.RR_PANDA5 },
+    { id: "rr-kitten-5", name: "Kitten in a Teacup", hue: "V", art: RH.art.RR_KITTEN5 },
+    { id: "rr-kitten-7", name: "Kitten and Her Yarn", hue: "R", art: RH.art.RR_KITTEN7 },
+    { id: "rr-duck-7", name: "Duck and Ducklings", hue: "G", art: RH.art.RR_DUCK7 },
+    { id: "rr-puppy-7", name: "Puppy in a Flower Basket", hue: "B", art: RH.art.RR_PUPPY7 },
     /* taken out on Oct 20 at her request: the two sea turtle samples ("rr-turtle-10", "rr-turtle-15") and the fox ("rr-fox"); never reuse those ids */
     { id: "rr-owl", name: "Owl on a Blossom Branch", hue: "V", art: RH.art.RR_OWL },
     { id: "rr-hummingbird", name: "Hummingbird and Hibiscus", hue: "N", art: RH.art.RR_HUMMINGBIRD },
