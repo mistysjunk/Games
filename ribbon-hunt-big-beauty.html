@@ -249,6 +249,8 @@ button:hover { border-color: var(--text-soft); }
 .panel-head h2 { font-family: var(--font-sign); font-weight: 400; font-size: 2rem; line-height: 1.1; color: #fff3cf; }
 .panel-head span { color: var(--text-soft); font-size: 0.875rem; font-variant-numeric: tabular-nums; }
 .panel-head .buttons { margin-left: auto; display: flex; gap: 0.5rem; }
+.panel-head .buttons { flex-wrap: wrap; justify-content: flex-end; }
+#pmsg { width: 100%; text-align: center; color: #fff3cf; font-size: 0.95rem; min-height: 1.2em; margin: 0.2rem 0 0; }
 /* each chapter is a row: its name on the left, its numbered tiles on the right */
 /* first a big button for each chapter; tapping one swaps to that chapter's numbered tiles */
 .chapters { flex: 1; display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content: center; gap: 0.7rem; max-width: 100%; }
@@ -322,9 +324,13 @@ button:hover { border-color: var(--text-soft); }
       <span id="found">0 of 46 found</span>
       <div class="buttons">
         <button type="button" id="back" hidden>Back</button>
+        <button type="button" id="psave">Save progress</button>
+        <button type="button" id="pload">Load progress</button>
         <button type="button" id="close">Close</button>
+        <input type="file" id="pfile" accept=".json,application/json,text/plain" hidden>
       </div>
     </div>
+    <p id="pmsg" role="status"></p>
     <div class="chapters" id="chapters"></div>
     <div class="grids" id="tiles" hidden></div>
   </section>
@@ -20619,6 +20625,53 @@ RH.CHAPTERS = [
   $("open").addEventListener("click", function () { renderTiles(); panel.hidden = false; showChapters(); });
   $("back").addEventListener("click", showChapters);
   $("close").addEventListener("click", function () { panel.hidden = true; $("open").focus(); });
+  /* ---------- Nov 24: Save progress / Load progress. Her Found marks once got wiped off the iPad, so she can keep a copy as a small file in the Files app and load it back ---------- */
+  function pMsg(t) { $("pmsg").textContent = t; }
+  $("psave").addEventListener("click", function () {
+    try { saveNow(); } catch (e) {}
+    var data = { game: "ribbon-hunt-big-beauty", saved: new Date().toISOString(), keys: {} };
+    try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf(KEY) === 0) data.keys[k] = localStorage.getItem(k); } } catch (e) {}
+    var n = Object.keys(solved).length;
+    var d = new Date(), name = "Big-Beauty-progress-" + d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2) + ".json";
+    var text = JSON.stringify(data), file = null;
+    try { file = new File([text], name, { type: "application/json" }); } catch (e) {}
+    var done = function () { pMsg("Saved " + n + " found drawings. Keep the file in your Files app."); };
+    if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({ files: [file] }).then(done).catch(function (err) { if (!err || err.name !== "AbortError") pMsg("Couldn’t save. Please try again."); });
+      return;
+    }
+    try {
+      var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: "application/json" })); a.download = name;
+      document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 2000); done();
+    } catch (e) { pMsg("Couldn’t save. Please try again."); }
+  });
+  $("pload").addEventListener("click", function () { $("pfile").value = ""; $("pfile").click(); });
+  $("pfile").addEventListener("change", function () {
+    var f = this.files && this.files[0]; if (!f) return;
+    var r = new FileReader();
+    r.onload = function () {
+      var data; try { data = JSON.parse(r.result); } catch (e) { data = null; }
+      if (!data || data.game !== "ribbon-hunt-big-beauty" || !data.keys || typeof data.keys !== "object") { pMsg("That isn’t a Big Beauty progress file."); return; }
+      try {
+        var got = {}, mine = {};
+        try { got = JSON.parse(data.keys[KEY] || "null") || {}; } catch (e) {}
+        try { mine = JSON.parse(localStorage.getItem(KEY) || "null") || {}; } catch (e) {}
+        var all = {}; (Array.isArray(mine.solved) ? mine.solved : []).concat(Array.isArray(got.solved) ? got.solved : []).forEach(function (id) { if (typeof id === "string") all[id] = true; });
+        mine.solved = Object.keys(all); if (mine.level === undefined) mine.level = got.level; if (got.tip) mine.tip = true; if (mine.count === undefined) mine.count = got.count;
+        localStorage.setItem(KEY, JSON.stringify(mine));                       // Found marks: both kept, nothing taken away
+        var gp = {}, mp = {};
+        try { gp = cleanProg(JSON.parse(data.keys[PKEY] || "null")); } catch (e) { gp = cleanProg(null); }
+        mp = cleanProg(JSON.parse(localStorage.getItem(PKEY) || "null"));
+        Object.keys(gp.d).forEach(function (id) { if (!mp.d[id] || gp.d[id].at > mp.d[id].at) mp.d[id] = gp.d[id]; });
+        if (!mp.last) mp.last = gp.last;
+        localStorage.setItem(PKEY, JSON.stringify(cleanProg(mp)));            // half-done drawings: the newer one wins
+        Object.keys(data.keys).forEach(function (k) { if (k.indexOf(KEY) === 0 && k !== KEY && k !== PKEY && localStorage.getItem(k) === null) localStorage.setItem(k, data.keys[k]); });
+        pMsg("Loaded! Opening your drawings…");
+        setTimeout(function () { location.reload(); }, 800);
+      } catch (e) { pMsg("Couldn’t load that file. Please try again."); }
+    };
+    r.readAsText(f);
+  });
   document.addEventListener("keydown", function (e) {
     if (!panel.hidden) { if (e.key === "Escape") { if (openChapter === null) panel.hidden = true; else showChapters(); } return; }
     if (complete) return;
